@@ -37,6 +37,11 @@ const links = [
     url: "/users",
   },
   {
+    name: "Customers",
+    icon: <FaUsers />,
+    url: "/customers",
+  },
+  {
     name: "Orders",
     icon: <GiShop />,
     url: "/orders",

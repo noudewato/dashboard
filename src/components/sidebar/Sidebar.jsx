@@ -1,4 +1,5 @@
 import React from "react";
+import './sidebar.css';
 import {
   MdOutlineDashboard,
   MdOutlineAnalytics,
@@ -40,6 +41,11 @@ const Sidebar = ({isOpen}) => {
       url: "/users",
     },
     {
+      name: "Customers",
+      icon: <FaUsers />,
+      url: "/customers",
+    },
+    {
       name: "Orders",
       icon: <GiShop />,
       url: "/orders",
@@ -72,20 +78,22 @@ const Sidebar = ({isOpen}) => {
 
   return (
     <div
-      className={` lg:flex relative inset-0 top-0 left-0 bottom-0 z-50 bg-gray-300 transition-transform transform ${
-        isOpen ? "lg:hidden translate-x-0 bg-slates opacity-95" : "-translate-x-full"
-      }`}
+      className={`custom-scrollbar-style fixed lg:flex w-[300px] overflow-y-scroll inset-0 top-0 left-0 bottom-0 z-50 bg-gray-300 transition-transform transform `}
+      // ${
+      //   // isOpen ? "lg:hidden translate-x-0 bg-slates opacity-95" : "-translate-x-full"
+      // }
     >
       <div
-        className={`${
-          isOpen
-            ? "w-[300px] bg-zinc h-[100%] overflow-y-auto"
-            : ""
-        }`}
+        // className={`${
+        //   isOpen
+        //     ? "w-[300px] bg-zinc h-[100%] overflow-y-auto"
+        //     : ""
+        // }`}
+        className="" // Apply custom scrollbar style here
       >
         <div>
           <h1 className="text-xl text-purple font-bold ps-10 pt-3 mb-10">
-            XYZ Supermarket
+            CSMS
           </h1>
         </div>
         <div>
@@ -93,21 +101,19 @@ const Sidebar = ({isOpen}) => {
             <SidebarItem key={index} {...link} />
           ))}
         </div>
-        <hr className="ms-5 my-5 h-[2px] bg-slate-200" />
+        <hr className="ms-5 my-5 w-[250px] h-[2px] bg-slate-200" />
         <div>
           {links.slice(4, 9).map((link, index) => (
             <SidebarItem key={index} {...link} />
           ))}
         </div>
-        <hr className="ms-5 my-5 h-[2px] bg-slate-200" />
+        <hr className="ms-5 my-5 w-[250px] h-[2px] bg-slate-200" />
         <div>
           {links.slice(9, 11).map((link, index) => (
             <SidebarItem key={index} {...link} />
           ))}
         </div>
       </div>
-
-      <div>hello</div>
     </div>
   );
 };

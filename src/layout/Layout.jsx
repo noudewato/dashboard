@@ -10,10 +10,12 @@ const Layout = ({ children }) => {
   };
 
   return (
-    <div className="flex bg-zinc min-h-[100vh]">
-      <Sidebar isOpen={isSidebarOpen} />
-      <div className="w-full lg:w-3/4 p-5">
-        <Navbar toggleSidebar={toggleSidebar} />
+    <div className="flex">
+      <Sidebar  />
+      {/* isOpen={isSidebarOpen} */}
+      <div className="w-full p-5 bg-zinc min-h-[100vh] ml-[300px]">
+        <Navbar  />
+        {/* toggleSidebar={toggleSidebar} */}
         {children}
       </div>
     </div>
