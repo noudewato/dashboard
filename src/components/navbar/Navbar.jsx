@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   MdArrowDropDown,
   MdOutlineSupervisedUserCircle,
@@ -9,16 +9,31 @@ import { HiMiniBellAlert } from "react-icons/hi2";
 import { LuMenuSquare } from "react-icons/lu";
 
 const Navbar = ({ toggleSidebar }) => {
+
+  const [dateTime, setDateTime] = useState(new Date()) 
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setDateTime(new Date())
+
+    }, 1000)
+
+    return () => {
+      clearInterval(interval)
+    }
+  }, [])
+
+
   return (
     <div>
-      <div className="w-full flex justify-between">
+      <div className="bg-neutral rounded-lg p-3 w-full flex justify-between items-center mb-5">
         <span
           className="text-3xl block lg:hidden cursor-pointer"
           onClick={toggleSidebar}
         >
           <LuMenuSquare />
         </span>
-        <div className="flex gap-3">
+        {/* <div className="flex gap-3">
           <div>
             <button className="flex text-lg text-neutral align-middle px-8 py-2 rounded-md bg-primary hover:bg-primry">
               <span className="pr-1"> Maranata, New York</span>
@@ -32,6 +47,17 @@ const Navbar = ({ toggleSidebar }) => {
               + Add Product
             </button>
           </div>
+        </div> */}
+        <div>
+           <h1 className="text-2xl font-semibold">
+              Admin Dashboard
+           </h1>
+        </div>
+
+        <div>
+          <span>
+            {dateTime.toLocaleString()}
+          </span>
         </div>
         <div className="flex mr-4 cursor-pointer">
           <span className="relative text-primry text-2xl mr-2">
@@ -45,7 +71,7 @@ const Navbar = ({ toggleSidebar }) => {
           </span>
         </div>
       </div>
-      <div className="w-[400px] my-7 flex align-middle bg-neutral rounded-lg shadow-xl">
+      {/* <div className="w-[400px] my-7 flex align-middle bg-neutral rounded-lg shadow-xl">
         <span className="pt-3 text-purple text-lg ps-1">
           <MdSearch />
         </span>
@@ -64,7 +90,7 @@ const Navbar = ({ toggleSidebar }) => {
             <MdArrowDropDown />
           </span>
         </span>
-      </div>
+      </div> */}
     </div>
   );
 };

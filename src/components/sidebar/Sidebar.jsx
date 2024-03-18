@@ -78,7 +78,7 @@ const Sidebar = ({isOpen}) => {
 
   return (
     <div
-      className={`custom-scrollbar-style fixed lg:flex w-[300px] overflow-y-scroll inset-0 top-0 left-0 bottom-0 z-50 bg-gray-300 transition-transform transform `}
+      className={`custom-scrollbar-style fixed lg:flex w-[300px] overflow-y-scroll inset-0 top-0 left-0 bottom-0 z-50 bg-neutral transition-transform transform `}
       // ${
       //   // isOpen ? "lg:hidden translate-x-0 bg-slates opacity-95" : "-translate-x-full"
       // }

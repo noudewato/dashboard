@@ -34,7 +34,7 @@ const Dashboard = () => {
           alt="user"
         />
         <h1 className="text-xl text-slate  font-bold ms-2">
-          Good Evening Jason Smith
+          Good Morning Fawaz Noudewato
         </h1>
       </div>
       <Widgets />
