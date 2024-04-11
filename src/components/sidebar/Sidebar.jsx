@@ -1,5 +1,5 @@
 import React from "react";
-import './sidebar.css';
+import "./sidebar.css";
 import {
   MdOutlineDashboard,
   MdOutlineAnalytics,
@@ -13,7 +13,7 @@ import { TbTruckDelivery } from "react-icons/tb";
 import { GiShop } from "react-icons/gi";
 import SidebarItem from "./SidebarItem";
 
-const Sidebar = ({isOpen}) => {
+const Sidebar = ({ isOpen }) => {
   const links = [
     {
       name: "Dashboard",

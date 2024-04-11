@@ -1,17 +1,42 @@
 import React, { useState } from "react";
 import { Table } from "react-table"; // Assuming this is a custom or different table component
 import ExcelExport from "../../utils/ExcelExport"; // Assuming you have a utility function for exporting to Excel
+import { FaEye } from "react-icons/fa6";
+import { CiEdit } from "react-icons/ci";
+import { GoDotFill, GoTrash } from "react-icons/go";
+import Avatar from "react-avatar";
 
 // Generate random product data
 function generateRandomProduct() {
-  const categories = ["Fruits", "Vegetables", "Dairy", "Meat", "Beverages", "Snacks"];
+  const categories = [
+    "Fruits",
+    "Vegetables",
+    "Dairy",
+    "Meat",
+    "Beverages",
+    "Snacks",
+  ];
   const names = [
-    "Apple", "Banana", "Orange", "Carrot", "Broccoli", "Milk", "Cheese", "Chicken", "Beef",
-    "Soda", "Chips", "Cookies", "Water", "Juice"
+    "Apple",
+    "Banana",
+    "Orange",
+    "Carrot",
+    "Broccoli",
+    "Milk",
+    "Cheese",
+    "Chicken",
+    "Beef",
+    "Soda",
+    "Chips",
+    "Cookies",
+    "Water",
+    "Juice",
   ];
   const statuses = ["active", "inactive"];
 
-  const randomCategory = categories[Math.floor(Math.random() * categories.length)];
+  const randomCategory =
+    categories[Math.floor(Math.random() * categories.length)];
+
   const randomName = names[Math.floor(Math.random() * names.length)];
   const randomStatus = statuses[Math.floor(Math.random() * statuses.length)];
 
@@ -19,12 +44,12 @@ function generateRandomProduct() {
     id: Math.random().toString(36).substr(2, 9),
     name: randomName,
     category: randomCategory,
-    status: randomStatus
+    status: randomStatus,
   };
 }
 
 // Create an array of 100 random products
-const data = Array.from({ length: 100 }, generateRandomProduct);
+const data = Array.from({ length: 193 }, generateRandomProduct);
 
 function ProductTable() {
   // State variables for filtering, searching, pagination, etc.
@@ -47,9 +72,10 @@ function ProductTable() {
   };
 
   // Filtered and paginated data
-  const filteredData = data.filter((item) =>
-    item.category.includes(categoryFilter) &&
-    item.name.toLowerCase().includes(searchTerm.toLowerCase())
+  const filteredData = data.filter(
+    (item) =>
+      item.category.includes(categoryFilter) &&
+      item.name.toLowerCase().includes(searchTerm.toLowerCase())
   );
   const pageSize = 10;
   const totalPages = Math.ceil(filteredData.length / pageSize);
@@ -66,11 +92,13 @@ function ProductTable() {
         <select onChange={(e) => setCategoryFilter(e.target.value)}>
           <option value="">All Categories</option>
           {/* Map over unique product categories */}
-          {Array.from(new Set(data.map((item) => item.category))).map((category) => (
-            <option key={category} value={category}>
-              {category}
-            </option>
-          ))}
+          {Array.from(new Set(data.map((item) => item.category))).map(
+            (category) => (
+              <option key={category} value={category}>
+                {category}
+              </option>
+            )
+          )}
         </select>
 
         {/* Search input */}
@@ -82,46 +110,83 @@ function ProductTable() {
         />
       </div>
 
-      {/* Table component */}
-      <table>
-        {/* Table header */}
-        <thead>
-          <tr>
-            <th>Product Name</th>
-            <th>Category</th>
-            <th>Status</th>
-            {/* Add more table headers as needed */}
-          </tr>
-        </thead>
-        {/* Table body */}
-        <tbody>
-          {/* Map over paginated data */}
-          {paginatedData.map((item) => (
-            <tr key={item.id}>
-              <td>{item.name}</td>
-              <td>{item.category}</td>
-              <td>
-                <select
-                  value={item.status}
-                  onChange={(e) => updateStatus(item.id, e.target.value)}
-                >
-                  <option value="active">Active</option>
-                  <option value="inactive">Inactive</option>
-                </select>
-              </td>
-              {/* Add more table cells as needed */}
+      <div className="overflow-auto rounded-lg border border-gray300 bg-neutral">
+        <table className="w-full">
+          {/* Table header */}
+          <thead className="bg-gray300">
+            <tr>
+              <th className="px-6 py-3 text-left">Product</th>
+              <th className="px-6 py-3 text-left">Category</th>
+              <th className="px-6 py-3 text-left">Status</th>
+              <th className="px-6 py-3 text-left">Actions</th>
             </tr>
-          ))}
-        </tbody>
-      </table>
+          </thead>
+          {/* Table body */}
+          <tbody>
+            {/* Map over paginated data */}
+            {paginatedData.map((item) => (
+              <tr key={item.id} className="border-b border-gray300">
+                <td className="px-6 py-4 whitespace-nowrap flex items-center">
+                  <Avatar name={item.name} size="60" round="50px" />
+                  <div className="ml-2">
+                    <span className="text-md font-semibold">{item.name}</span>
+                    <br />
+                    <span className="text-sm text-slate500">
+                      {item.category}
+                    </span>
+                  </div>
+                </td>
+                {item.status === "active" ? (
+                  <td className="px-6 py-4 whitespace-nowrap">
+                    <span className="flex items-center px-4 py-1 border rounded-2xl border-lime500 text-lime500">
+                      <span className="pe-1 text-lime500">
+                        <GoDotFill />
+                      </span>
+                      Active
+                    </span>
+                  </td>
+                ) : (
+                  <td className="px-6 py-4 whitespace-nowrap">
+                    <span className="flex items-center px-4 py-1 border rounded-2xl">
+                      <span className="pe-1">
+                        <GoDotFill />
+                      </span>
+                      Ineactive
+                    </span>
+                  </td>
+                )}
+                <td className="px-6 py-4 whitespace-nowrap">
+                  <button className="text-2xl text-blue500 hover:text-blue400 mr-2 transition duration-300 ease-in-out transform hover:scale-105 hover:translate-x-0">
+                    <FaEye />
+                  </button>
+                  <button className="text-2xl text-lime500 hover:text-lime500 mr-2 transition duration-300 ease-in-out transform hover:scale-105 hover:translate-x-0">
+                    <CiEdit />
+                  </button>
+                  <button className="text-2xl text-red hover:text-red transition duration-300 ease-in-out transform hover:scale-105 hover:translate-x-0">
+                    <GoTrash />
+                  </button>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
 
       {/* Pagination controls */}
       <div>
-        <button disabled={currentPage === 1} onClick={() => setCurrentPage(currentPage - 1)}>
+        <button
+          disabled={currentPage === 1}
+          onClick={() => setCurrentPage(currentPage - 1)}
+        >
           Previous
         </button>
-        <span>{currentPage} / {totalPages}</span>
-        <button disabled={currentPage === totalPages} onClick={() => setCurrentPage(currentPage + 1)}>
+        <span>
+          {currentPage} / {totalPages}
+        </span>
+        <button
+          disabled={currentPage === totalPages}
+          onClick={() => setCurrentPage(currentPage + 1)}
+        >
           Next
         </button>
       </div>

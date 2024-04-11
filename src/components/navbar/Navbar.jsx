@@ -28,7 +28,7 @@ const Navbar = ({ toggleSidebar }) => {
     <div>
       <div className="bg-neutral rounded-lg p-3 w-full flex justify-between items-center mb-5">
         <span
-          className="text-3xl block lg:hidden cursor-pointer"
+          className="text-3xl md:hidden cursor-pointer"
           onClick={toggleSidebar}
         >
           <LuMenuSquare />

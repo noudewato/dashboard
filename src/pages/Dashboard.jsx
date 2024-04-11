@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import Layout from "../layout/Layout";
 import Widgets from "../components/widgets/Widgets";
 import Statics from "../components/statics/Statics";

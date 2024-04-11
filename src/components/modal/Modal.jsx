@@ -1,4 +1,3 @@
-import React, { useState } from "react";
 import {
   TERipple,
   TEModal,
@@ -8,21 +7,12 @@ import {
   TEModalBody,
   TEModalFooter,
 } from "tw-elements-react";
+import FormComponent from "../form/Form";
 
-export default function StaticBackdrop(){
-  const [showModal, setShowModal] = useState(false);
+// eslint-disable-next-line react/prop-types
+const Modal = ({ showModal, setShowModal }) => {
   return (
     <div>
-      {/* <!-- Button trigger modal --> */}
-      <TERipple rippleColor="white">
-        <button
-          type="button"
-          className="inline-block rounded bg-primary px-6 pb-2 pt-2.5 text-xs font-medium uppercase leading-normal text-white shadow-[0_4px_9px_-4px_#3b71ca] transition duration-150 ease-in-out hover:bg-primary-600 hover:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] focus:bg-primary-600 focus:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] focus:outline-none focus:ring-0 active:bg-primary-700 active:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] dark:shadow-[0_4px_9px_-4px_rgba(59,113,202,0.5)] dark:hover:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)] dark:focus:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)] dark:active:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)]"
-          onClick={() => setShowModal(true)}
-        >
-          Launch static backdrop modal
-        </button>
-      </TERipple>
 
       {/* <!-- Modal --> */}
       <TEModal show={showModal} setShow={setShowModal} staticBackdrop>
@@ -31,7 +21,7 @@ export default function StaticBackdrop(){
             <TEModalHeader>
               {/* <!--Modal title--> */}
               <h5 className="text-xl font-medium leading-normal text-neutral-800 dark:text-neutral-200">
-                Modal title
+                New form
               </h5>
               {/* <!--Close button--> */}
               <button
@@ -57,7 +47,9 @@ export default function StaticBackdrop(){
               </button>
             </TEModalHeader>
             {/* <!--Modal body--> */}
-            <TEModalBody>...</TEModalBody>
+            <TEModalBody>
+              <FormComponent />
+            </TEModalBody>
             <TEModalFooter>
               <TERipple rippleColor="light">
                 <button
@@ -82,4 +74,6 @@ export default function StaticBackdrop(){
       </TEModal>
     </div>
   );
-}
+};
+
+export default Modal;
