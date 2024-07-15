@@ -2,17 +2,15 @@ import { useEffect, useState } from "react";
 import LoadingPage from "../../components/loading/LoadingPage";
 import { Helmet } from "react-helmet-async";
 import Layout from "../../layout/Layout";
-import EmployeeTable from "../../components/table/EmployeeTable";
 import TopBar from "../../components/topbar/TopBar";
+import MeasurementTypeTable from "../../components/table/MeasurementTypeTable";
 
-const Stores = () => {
+const Measurements = () => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const setTimer = setTimeout(() => {
-      if (loading) {
-        setLoading(false);
-      }
+      setLoading(false);
     }, 3000);
 
     return () => clearTimeout(setTimer);
@@ -21,18 +19,15 @@ const Stores = () => {
   return (
     <Layout>
       <Helmet>
-        <title>Dashboard | Stores</title>
+        <title>Measurement Type</title>
       </Helmet>
-
-      <TopBar pageTilte="Stores" />
-      <div className="w-full">
+      <div className="">
         {loading ? (
           <LoadingPage />
         ) : (
           <div className="overflow-hidden">
-            <div>
-              <EmployeeTable />
-            </div>
+            <TopBar pageTilte="Measurement Type" />
+            <MeasurementTypeTable />
           </div>
         )}
       </div>
@@ -40,4 +35,4 @@ const Stores = () => {
   );
 };
 
-export default Stores;
+export default Measurements;

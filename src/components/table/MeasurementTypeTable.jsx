@@ -1,38 +1,37 @@
 import { useMemo, useState } from "react";
 // import ExcelExport from "../../utils/ExcelExport"; // Assuming you have a utility function for exporting to Excel
-import { Employees } from "../../data/employee";
-import Avatar from "react-avatar";
+import { MeasurementTypes } from "../../data/measurementType";
 import { GoDotFill, GoTrash } from "react-icons/go";
 import { CiEdit } from "react-icons/ci";
 import { FaEye } from "react-icons/fa6";
 import { MdNavigateBefore, MdNavigateNext } from "react-icons/md";
 import Modal from "../modal/Modal";
+import { Link } from "react-router-dom";
 
-
-function EmployeeTable() {
+function MeasurementTypeTable() {
   // State variables for filtering, searching, pagination, etc.
   const [showModal, setShowModal] = useState(false);
-  const [jobFilter, setJobFilter] = useState("");
+  // const [jobFilter, setJobFilter] = useState("");
   const [status, setStatus] = useState("");
   const [searchTerm, setSearchTerm] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
 
   // Filtered and paginated data
   const filteredData = useMemo(() => {
-    let result = Employees;
-    if (status !== "") {
-      result = result.filter((item) => item.status === status);
-    }
-    if (jobFilter !== "") {
-      result = result.filter((item) => item.jobTitleName.includes(jobFilter));
-    }
+    let result = MeasurementTypes;
+    // if (status !== "") {
+    //   result = result.filter((item) => item.status === status);
+    // }
+    // if (jobFilter !== "") {
+    //   result = result.filter((item) => item.jobTitleName.includes(jobFilter));
+    // }
     if (searchTerm !== "") {
       result = result.filter((item) =>
-        item.preferredFullName.toLowerCase().includes(searchTerm.toLowerCase())
+        item.name.toLowerCase().includes(searchTerm.toLowerCase())
       );
     }
     return result;
-  }, [jobFilter, status, searchTerm]);
+  }, [searchTerm]);
   const pageSize = 10;
   const totalPages = Math.ceil(filteredData.length / pageSize);
   const paginatedData = filteredData.slice(
@@ -45,35 +44,19 @@ function EmployeeTable() {
       {/* UI elements for filtering, searching, pagination, and export */}
       <div className="flex items-center justify-between gap-x-4">
         <div className="flex items-center pb-4 gap-x-4">
-          <select
+          {/* <select
             className="ml-1 p-4 border border-gray300 outline-none shadow-lg rounded-lg hover:cursor-pointer focus:outline-none focus:ring focus:border-blue-500"
             onChange={(e) => setJobFilter(e.target.value)}
           >
             <option value="">All Categories</option>
             {Array.from(
-              new Set(Employees.map((item) => item.jobTitleName))
+              new Set(MeasurementTypes.map((item) => item.jobTitleName))
             ).map((jobTitleName) => (
               <option className="" key={jobTitleName} value={jobTitleName}>
                 {jobTitleName}
               </option>
             ))}
-          </select>
-
-          <select
-            className="p-4 font-gray400 border border-gray300 outline-none shadow-lg rounded-lg hover:cursor-pointer focus:outline-none focus:ring focus:border-blue-500"
-            onChange={(e) => setStatus(e.target.value)}
-          >
-            <option value="">Status</option>
-            {Array.from(new Set(Employees.map((item) => item.status))).map(
-              (status) => (
-                <option key={status} value={status}>
-                  {status}
-                </option>
-              )
-            )}
-          </select>
-
-          {/* Search input */}
+          </select> */}
           <input
             className="p-3 border border-gray300 focus:outline-none focus:ring focus:border-blue-500 rounded-lg shadow-lg w-[100%]"
             type="text"
@@ -81,6 +64,22 @@ function EmployeeTable() {
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
           />
+
+          {/* <select
+            className="p-4 font-gray400 border border-gray300 outline-none shadow-lg rounded-lg hover:cursor-pointer focus:outline-none focus:ring focus:border-blue-500"
+            onChange={(e) => setStatus(e.target.value)}
+          >
+            <option value="">Status</option>
+            {Array.from(new Set(MeasurementTypes.map((item) => item.status))).map(
+              (status) => (
+                <option key={status} value={status}>
+                  {status}
+                </option>
+              )
+            )}
+          </select> */}
+
+          {/* Search input */}
         </div>
         <div className="flex items-center justify-end gap-x-2">
           <button className="transition duration-300 ease-in-out transform hover:scale-105 rounded-full bg-blue500 text-neutral py-3 px-6 font-semibold mr-2 hover:bg-blue400 hover:translate-x-0">
@@ -90,7 +89,7 @@ function EmployeeTable() {
             onClick={() => setShowModal(true)}
             className="transition duration-300 ease-in-out transform hover:scale-105 rounded-full bg-blue500 text-neutral py-3 px-6 font-semibold mr-2 hover:bg-blue400 hover:translate-x-0"
           >
-            New User
+            Add Fashion Type
           </button>
         </div>
         {/* Category filter dropdown */}
@@ -102,16 +101,11 @@ function EmployeeTable() {
           {/* Table header */}
           <thead className="bg-gray300">
             <tr>
-              <th className="px-6 py-3 text-left">FullName</th>
-              <th className="px-6 py-3 text-left">Job Title</th>
-              <th className="px-6 py-3 text-left">Phone</th>
-              <th className="px-6 py-3 text-left">Status</th>
-              <th className="px-6 py-3 text-left whitespace-nowrap">
-                Region Code
-              </th>
-              <th className="px-6 py-3 text-left whitespace-nowrap">
-                User Code
-              </th>
+              <th className="px-6 py-3 text-left">No.</th>
+              <th className="px-6 py-3 text-left">Name</th>
+              <th className="px-4 py-3 text-left">Note</th>
+              <th className="px-4 py-3 text-left">CreatedBy</th>
+
               <th className="px-6 py-3 text-left">Actions</th>
             </tr>
           </thead>
@@ -119,57 +113,34 @@ function EmployeeTable() {
           <tbody>
             {/* Map over paginated data */}
             {paginatedData.map((item) => (
-              <tr key={item.userId} className="border-b border-gray300">
+              <tr
+                key={item.id}
+                className="border-b  items-center border-gray300"
+              >
                 <td className="px-4 py-2 whitespace-nowrap flex items-center">
-                  <Avatar name={item.firstName} size="50" round="50px" />
-                  <div className="ml-2">
-                    <span className="text-sm font-semibold">
-                      {item.preferredFullName}
-                    </span>
-                    <br />
-                    <span className="text-sm text-slate500">
-                      {item.emailAddress}
-                    </span>
-                  </div>
+                  {item.id}
                 </td>
-                <td className="px-4 py-2 whitespace-nowrap">
-                  {item.jobTitleName}
-                </td>
-                <td className="px-4 py-2 whitespace-nowrap">
-                  {item.phoneNumber}
-                </td>
-                {item.status === "active" ? (
-                  <td className="px-4 py-2 whitespace-nowrap">
-                    <span className="flex items-center px-4 py-1 border rounded-2xl border-lime500 text-lime500">
-                      <span className="pe-1 text-lime500">
-                        <GoDotFill />
-                      </span>
-                      Active
-                    </span>
-                  </td>
-                ) : (
-                  <td className="px-4 py-2 whitespace-nowrap">
-                    <span className="flex items-center px-4 py-1 border rounded-2xl">
-                      <span className="pe-1">
-                        <GoDotFill />
-                      </span>
-                      Ineactive
-                    </span>
-                  </td>
-                )}
 
-                <td className="px-4 py-2 whitespace-nowrap">{item.region}</td>
+                <td className="px-4 py-2 whitespace-nowrap">{item.name}</td>
+                <td className="px-4 py-2 whitespace-nowrap">{item.note}</td>
                 <td className="px-4 py-2 whitespace-nowrap">
-                  {item.employeeCode}
+                  {item.createdBy}
                 </td>
-                <td className="px-4 py-2 whitespace-nowrap">
-                  <button className="text-2xl text-blue500 hover:text-blue400 mr-2 transition duration-300 ease-in-out transform hover:scale-105 hover:translate-x-0">
+
+                <td className="px-4 py-2 items-center whitespace-nowrap">
+                  <Link
+                    to={`measurements/${item.id}`}
+                    className="text-lg border border-purple bg-purple px-3 py-1 rounded-lg text-gray-900 hover:text-neutral mr-2 transition duration-300 ease-in-out transform hover:scale-105 hover:translate-x-0"
+                  >
+                    Measures
+                  </Link>
+                  <button className="text-lg text-blue500 hover:text-blue400 mr-2 transition duration-300 ease-in-out transform hover:scale-105 hover:translate-x-0">
                     <FaEye />
                   </button>
-                  <button className="text-2xl text-lime500 hover:text-lime500 hover:text-lime600 mr-2 transition duration-300 ease-in-out transform hover:scale-105 hover:translate-x-0">
+                  <button className="text-lg text-lime500 hover:text-lime500 hover:text-lime600 mr-2 transition duration-300 ease-in-out transform hover:scale-105 hover:translate-x-0">
                     <CiEdit />
                   </button>
-                  <button className="text-2xl text-red hover:text-red hover:text-red500 transition duration-300 ease-in-out transform hover:scale-105 hover:translate-x-0">
+                  <button className="text-lg text-red hover:text-red hover:text-red500 transition duration-300 ease-in-out transform hover:scale-105 hover:translate-x-0">
                     <GoTrash />
                   </button>
                 </td>
@@ -213,4 +184,4 @@ function EmployeeTable() {
   );
 }
 
-export default EmployeeTable;
+export default MeasurementTypeTable;

@@ -1,9 +1,9 @@
-import EmployeeTable from "../../components/table/EmployeeTable"
+import CustumerTable from "../../components/table/CustomerTable"
 
 const Drivers = () => {
   return (
     <div>
-      <EmployeeTable />
+      <CustumerTable />
     </div>
   )
 }

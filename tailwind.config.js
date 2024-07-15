@@ -22,6 +22,8 @@ export default {
       orange: "#f97316",
       gray400: "#9ca3af",
       gray300: "#d1d5db",
+      lime200: "#ecfccb",
+      slate200: "#e4e4e7",
       lime500: "#65a30d",
       lime600: "#84cc16",
       blue500: "#3b82f6",

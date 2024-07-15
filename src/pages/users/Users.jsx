@@ -25,7 +25,7 @@ const Users = () => {
         {loading ? (
           <LoadingPage />
         ) : (
-          <div className="overflow-hidden">
+          <div className="overflow-hidden shadow-xl rounded-2xl p-5">
             <TopBar pageTilte="Users" />
             <EmployeeTable />
           </div>

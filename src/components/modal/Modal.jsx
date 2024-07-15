@@ -10,7 +10,7 @@ import {
 import FormComponent from "../form/Form";
 
 // eslint-disable-next-line react/prop-types
-const Modal = ({ showModal, setShowModal }) => {
+const Modal = ({ showModal, setShowModal, title }) => {
   return (
     <div>
 
@@ -21,7 +21,7 @@ const Modal = ({ showModal, setShowModal }) => {
             <TEModalHeader>
               {/* <!--Modal title--> */}
               <h5 className="text-xl font-medium leading-normal text-neutral-800 dark:text-neutral-200">
-                New form
+                {title}
               </h5>
               {/* <!--Close button--> */}
               <button
