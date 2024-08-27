@@ -3,9 +3,9 @@ import LoadingPage from "../../components/loading/LoadingPage";
 import { Helmet } from "react-helmet-async";
 import Layout from "../../layout/Layout";
 import TopBar from "../../components/topbar/TopBar";
-import MeasurementTypeTable from "../../components/table/MeasurementTypeTable";
+import BodyPartTable from "../../components/table/BodyPartTable";
 
-const Measurements = () => {
+const BodyParts = () => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -19,15 +19,15 @@ const Measurements = () => {
   return (
     <Layout>
       <Helmet>
-        <title>Measurement Type</title>
+        <title>Body Parts</title>
       </Helmet>
       <div className="">
         {loading ? (
           <LoadingPage />
         ) : (
           <div className="overflow-hidden">
-            <TopBar pageTilte="Measurements" />
-            <MeasurementTypeTable />
+            <TopBar pageTilte="Body Parts" />
+            <BodyPartTable />
           </div>
         )}
       </div>
@@ -35,4 +35,4 @@ const Measurements = () => {
   );
 };
 
-export default Measurements;
+export default BodyParts;

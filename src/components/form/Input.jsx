@@ -23,7 +23,7 @@ const Input = ({
 
   return (
     <>
-      <label htmlFor={id} className="mb-1">
+      <label htmlFor={id} className="mb-1 font-medium">
         {label}
       </label>
       <div className="relative">
