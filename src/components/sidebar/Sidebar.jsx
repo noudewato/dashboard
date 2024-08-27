@@ -1,4 +1,3 @@
-import React from "react";
 import "./sidebar.css";
 import {
   MdOutlineDashboard,
@@ -8,7 +7,7 @@ import {
   MdLogout,
   MdOutlineSettings,
 } from "react-icons/md";
-import { FaShop, FaUsers, FaProductHunt } from "react-icons/fa6";
+import { FaShop, FaUsers, FaProductHunt, FaShirt } from "react-icons/fa6";
 import { TbTruckDelivery } from "react-icons/tb";
 import { GiShop } from "react-icons/gi";
 import SidebarItem from "./SidebarItem";
@@ -26,9 +25,9 @@ const Sidebar = ({ isOpen }) => {
       url: "/stores",
     },
     {
-      name: "Analytics",
-      icon: <MdOutlineAnalytics />,
-      url: "/analytics",
+      name: "Fashions",
+      icon: <FaShirt />,
+      url: "/fashions",
     },
     {
       name: "Drivers",
