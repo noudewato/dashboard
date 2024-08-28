@@ -179,7 +179,7 @@ function FashionTable() {
   };
 
   return (
-    <div className="container p-5 mx-auto rounded-2xl overflow-hidden border-2">
+    <div className="container-fluid p-5 mx-auto rounded-2xl overflow-hidden border-2">
       {/* UI elements for filtering, searching, pagination, and export */}
       <div className="flex items-center justify-between gap-x-4">
         <div className="flex items-center pb-4 gap-x-4">
